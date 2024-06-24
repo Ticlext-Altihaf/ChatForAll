@@ -45,7 +45,7 @@ const SendMessage = ({ scroll, addMessage }) => {
       <textarea
         id="messageInput"
         name="messageInput"
-        className="h-10 p-2.5 rounded-l-xl font-sans border-none grow bg-background-secondary dark:bg-background-secondary text-secondary dark:text-primary-dark text-base leading-none resize-none placeholder:text-secondary dark:placeholder:text-secondary-dark "
+        className="h-10 p-2.5 rounded-l-xl font-sans border-none grow bg-background-secondary dark:bg-background-secondary text-text-primary dark:text-primary-dark text-base leading-none resize-none placeholder:text-text-secondary dark:placeholder:text-secondary-dark "
         placeholder="Type your message here..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -53,7 +53,7 @@ const SendMessage = ({ scroll, addMessage }) => {
         ref={inputRef}
       />
       <button
-        className="w-16 h-10 px-2.5 py-1 rounded-r-xl text-secondary dark:text-primary-dark bg-primary dark:bg-primary-dark font-semibold"
+        className="w-16 h-10 px-2.5 py-1 rounded-r-xl text-white  dark:text-primary-dark bg-primary dark:bg-primary-dark font-semibold"
         type="submit"
       >
         ➤
