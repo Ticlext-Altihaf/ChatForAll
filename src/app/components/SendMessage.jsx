@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db, messages_db } from "../../firebase-config";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { debounce } from "lodash";
 
 const SendMessage = ({ scroll }) => {
@@ -18,26 +16,14 @@ const SendMessage = ({ scroll }) => {
     document.addEventListener("keydown", handleKDown);
   }, []);
 
-  const debouncedSendMessage =  debounce(async (message) => {
-    // event.preventDefault();
-    if (message.trim() === "") {
-      alert("Message cannot be empty!");
-      return;
-    }
-    await addDoc(collection(db, messages_db), {
-      text: message,
-      name: "User",
-      createdAt: serverTimestamp(),
-    });
+
+  const sendMessage = (event) => {
+    event.preventDefault();
+    if(message.trim() === "") return;
     setMessage("");
     setTimeout(() => {
       scroll.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }, 200);
-  }, 500);
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-    debouncedSendMessage(message); // Use the debounced function
   };
 
   const handleKeyDown = (event) => {

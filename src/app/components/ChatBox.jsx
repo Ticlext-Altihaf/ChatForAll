@@ -1,13 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  query,
-  collection,
-  orderBy,
-  onSnapshot,
-  getDocs,
-  writeBatch,
-} from "firebase/firestore";
-import { db, messages_db} from "../../firebase-config";
+
 import AdminMessage from "./AdminMessage";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
@@ -19,20 +11,9 @@ const ChatBox = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, messages_db), orderBy("createdAt", "desc"));
 
-    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-      const fetchedMessages = [];
-      QuerySnapshot.forEach((doc) => {
-        fetchedMessages.push({ ...doc.data(), id: doc.id });
-      });
-      const sortedMessages = fetchedMessages.sort(
-        (a, b) => a.createdAt - b.createdAt
-      );
-      setMessages(sortedMessages);
+      setMessages([]);
       setLoading(false);
-    });
-    return () => unsubscribe();
   }, []);
 
   const copyLastMessage = () => {
@@ -50,7 +31,7 @@ const ChatBox = () => {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
-  }, [messages]);
+  }, [copyLastMessage, messages]);
 
   return (
     <>
@@ -58,12 +39,7 @@ const ChatBox = () => {
         <Preloader />
       ) : (
         <div className="p-5 mb-16 text-[#3b3424] dark:text-[#cad3f5] flex flex-col items-center">
-          <AdminMessage>
-            Greetings and welcome to ChatForAll, a simple online chat
-            application. There is no need to log in. Use the clipboard button to
-            quickly copy the messages. Messages that are older than two days
-            will be automatically removed. Happy Chatting🚀
-          </AdminMessage>
+
           {messages?.map((message) => (
             <Message key={message.id} message={message} />
           ))}
