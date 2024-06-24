@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import format from "date-fns/format";
 import Image from "next/image";
+import Markdown from "react-markdown";
 
 const Message = ({ message }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -20,7 +21,18 @@ const Message = ({ message }) => {
           <div className={"flex flex-row" + (message.isMe ? " justify-end" : "")}>
 
             <div className="flex items-start break-all whitespace-pre-wrap">
-              {message.text}
+              {(!message.isMe) && (
+                  <div className="prose prose-sm dark:prose-dark">
+              <Markdown>
+                {message.text}
+              </Markdown>
+                    </div>
+                )}
+                {(message.isMe) && (
+                    <p>
+                        {message.text}
+                    </p>
+                )}
             </div>
           </div>
 
