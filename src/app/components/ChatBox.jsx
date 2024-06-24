@@ -51,7 +51,7 @@ const ChatBox = () => {
       {loading ? (
         <Preloader />
       ) : (
-        <div className="p-5 mb-16  flex flex-col items-center">
+        <div className="p-5 mb-16  flex flex-col ">
 
           {messages?.map((message) => (
             <Message key={message.id} message={message} />

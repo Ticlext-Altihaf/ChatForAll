@@ -16,22 +16,14 @@ const Message = ({ message }) => {
   return (
     <>
       {message.createdAt && (
-        <div className="bg-background-secondary dark:bg-background-secondary-dark my-2 p-4 flex flex-col rounded-2xl w-full md:w-3/4 lg:w:2/3 xl:w-3/5 2xl:w-1/2">
+        <div className={"my-2 p-4 flex flex-col rounded-2xl " + (message.isMe ? " self-end bg-primary text-white" : " bg-background-secondary w-fit text-text-primary dark:bg-background-secondary-dark dark:text-text-primary-dark")}>
           <div className={"flex flex-row" + (message.isMe ? " justify-end" : "")}>
 
             <div className="flex items-start break-all whitespace-pre-wrap">
               {message.text}
             </div>
           </div>
-          <div className={"flex flex-row mt-2" + (message.isMe ? " justify-end" : "")} >
-            <p className="flex items-center text-xs">
-              {format(
-                  message.createdAt,
-                "MMMM d, hh:mm a"
-              )}
-            </p>
 
-          </div>
         </div>
       )}
     </>
