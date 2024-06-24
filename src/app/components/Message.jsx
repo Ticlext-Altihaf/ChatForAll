@@ -16,7 +16,7 @@ const Message = ({ message }) => {
   return (
     <>
       {message.createdAt && (
-        <div className="bg-[#e6e9ef] dark:bg-[#1e1e2e] my-2 p-4 flex flex-col rounded-2xl w-full md:w-3/4 lg:w:2/3 xl:w-3/5 2xl:w-1/2">
+        <div className="bg-background-secondary dark:bg-background-secondary-dark my-2 p-4 flex flex-col rounded-2xl w-full md:w-3/4 lg:w:2/3 xl:w-3/5 2xl:w-1/2">
           <div className="flex flex-row">
             <Image
               className="w-8 h-8 rounded-full mr-2.5"
@@ -32,7 +32,7 @@ const Message = ({ message }) => {
           <div className="flex flex-row justify-between mt-2">
             <p className="flex items-center text-xs">
               {format(
-                new Date(message.createdAt.seconds * 1000),
+                  message.createdAt,
                 "MMMM d, hh:mm a"
               )}
             </p>
@@ -46,7 +46,7 @@ const Message = ({ message }) => {
                   width="15"
                   height="15"
                   viewBox="0 0 24 24"
-                  className="text-[#40a02b] dark:text-[#a6e3a1]"
+                  className="text-secondary dark:text-secondary-dark"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -57,7 +57,7 @@ const Message = ({ message }) => {
                   width="15"
                   height="15"
                   viewBox="0 0 24 24"
-                  className="text-[#40a02b] dark:text-[#a6e3a1]"
+                  className="text-secondary dark:text-secondary-dark"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >

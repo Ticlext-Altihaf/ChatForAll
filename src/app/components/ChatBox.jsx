@@ -16,6 +16,12 @@ const ChatBox = () => {
       setLoading(false);
   }, []);
 
+  const addMessage = (message) => {
+    if(!message.text.trim()) return;
+    if(!message.createdAt) message.createdAt = new Date();
+    setMessages((prevMessages) => [...prevMessages, message]);
+  }
+
   const copyLastMessage = () => {
     const lastMessage = messages[messages.length - 1];
     if (lastMessage) {
@@ -38,7 +44,7 @@ const ChatBox = () => {
       {loading ? (
         <Preloader />
       ) : (
-        <div className="p-5 mb-16 text-[#3b3424] dark:text-[#cad3f5] flex flex-col items-center">
+        <div className="p-5 mb-16  flex flex-col items-center">
 
           {messages?.map((message) => (
             <Message key={message.id} message={message} />
@@ -47,7 +53,7 @@ const ChatBox = () => {
       )}
       {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
       <span ref={scroll}></span>
-      <SendMessage scroll={scroll} />
+      <SendMessage scroll={scroll} addMessage={addMessage} />
       {/* <button onClick={copyLastMessage}>CopyLastMessage</button> */}
     </>
   );
