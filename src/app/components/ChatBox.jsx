@@ -4,6 +4,7 @@ import AdminMessage from "./AdminMessage";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
 import Preloader from "./Preloader";
+import {random} from "lodash";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -19,6 +20,12 @@ const ChatBox = () => {
   const addMessage = (message) => {
     if(!message.text.trim()) return;
     if(!message.createdAt) message.createdAt = new Date();
+    message.isMe = random(0, 1) === 1;
+    message.text = message.text.trim();
+    // remove trailing spaces and new lines
+    message.text = message.text.replace(/\s+$/, "");
+    message.text = message.text.replace(/\n+$/, "\n");
+
     setMessages((prevMessages) => [...prevMessages, message]);
   }
 
